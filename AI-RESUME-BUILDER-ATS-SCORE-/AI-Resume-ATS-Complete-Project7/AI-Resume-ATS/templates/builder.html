@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Resume Builder | AI Resume Builder{% endblock %}
+{% block content %}
+<section class="page-intro"><p class="eyebrow">RESUME WORKSPACE</p><h1>Build your resume</h1><p>Complete the fields below. Use truthful details and concise bullet points.</p></section>
+<form class="form-panel" method="post">
+  <div class="form-section">
+    <h2>Template Style & Accent</h2>
+    <div class="form-grid">
+      <label class="full-width">Select Template Design
+        <select name="template">
+          <option value="modern-blue" {% if data.get('template', template) == 'modern-blue' %}selected{% endif %}>Modern Blue — Tech & Modern Accent</option>
+          <option value="professional" {% if data.get('template', template) == 'professional' %}selected{% endif %}>Professional — Traditional Dark Slate</option>
+          <option value="elegant" {% if data.get('template', template) == 'elegant' %}selected{% endif %}>Elegant — Emerald Green Accent</option>
+        </select>
+      </label>
+    </div>
+  </div>
+  <div class="form-section"><h2>Personal information</h2><div class="form-grid">
+    <label>Full name *<input name="full_name" required value="{{ data.get('full_name','') }}" placeholder="e.g. Alex Morgan"></label>
+    <label>Target job title<input id="field-job-title" name="job_title" value="{{ data.get('job_title','') }}" placeholder="e.g. Python Developer"></label>
+    <label>Email<input type="email" name="email" value="{{ data.get('email','') }}" placeholder="alex@example.com"></label>
+    <label>Phone<input name="phone" value="{{ data.get('phone','') }}" placeholder="+1 (555) 019-2834"></label>
+    <label>Location<input name="location" value="{{ data.get('location','') }}" placeholder="City, State / Country"></label>
+    <label>LinkedIn URL<input name="linkedin" value="{{ data.get('linkedin','') }}" placeholder="https://linkedin.com/in/..."></label>
+    <label class="full-width">GitHub URL<input name="github" value="{{ data.get('github','') }}" placeholder="https://github.com/..."></label>
+  </div></div>
+  <div class="form-section"><h2>Resume content</h2><div class="form-grid">
+    <div class="full-width">
+      <div class="field-header">
+        <label for="field-summary" class="no-margin">Professional summary</label>
+        <button type="button" class="btn-ai" onclick="generateSummaryAI(this)">
+          <span class="ai-sparkle">✨</span> Auto-Write with AI
+        </button>
+      </div>
+      <textarea id="field-summary" name="summary" rows="3" placeholder="Click 'Auto-Write with AI' or type your summary...">{{ data.get('summary','') }}</textarea>
+    </div>
+
+    <label class="full-width">Education<textarea name="education" rows="3" placeholder="Degree, institution, dates, relevant coursework...">{{ data.get('education','') }}</textarea></label>
+
+    <div class="full-width">
+      <div class="field-header">
+        <label for="field-experience" class="no-margin">Experience / internships</label>
+        <button type="button" class="btn-ai" onclick="enhanceWithAI('field-experience', this)">
+          <span class="ai-sparkle">✨</span> Polish Bullets with AI
+        </button>
+      </div>
+      <textarea id="field-experience" name="experience" rows="4" placeholder="Enter rough duties or notes, then click 'Polish Bullets with AI'...">{{ data.get('experience','') }}</textarea>
+    </div>
+
+    <label class="full-width">Skills (comma separated)<textarea id="field-skills" name="skills" rows="2" placeholder="Python, SQL, HTML, CSS...">{{ data.get('skills','') }}</textarea></label>
+
+    <div class="full-width">
+      <div class="field-header">
+        <label for="field-projects" class="no-margin">Projects</label>
+        <button type="button" class="btn-ai" onclick="enhanceWithAI('field-projects', this)">
+          <span class="ai-sparkle">✨</span> Polish with AI
+        </button>
+      </div>
+      <textarea id="field-projects" name="projects" rows="4" placeholder="Project name, technologies, what you built, results...">{{ data.get('projects','') }}</textarea>
+    </div>
+
+    <label class="full-width">Certifications / achievements<textarea name="certifications" rows="2">{{ data.get('certifications','') }}</textarea></label>
+  </div></div>
+  <button class="btn btn-primary" type="submit">Preview resume →</button>
+</form>
+{% endblock %}

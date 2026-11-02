@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<div class="auth-wrap"><form class="form-panel auth-panel" method="post"><p class="eyebrow">GET STARTED</p><h1>Create account</h1><label>Full name<input name="name" required maxlength="120" autocomplete="name"></label><label>Email<input name="email" type="email" required autocomplete="email"></label><label>Password<input name="password" type="password" required minlength="8" autocomplete="new-password"><small>Use at least 8 characters.</small></label><button class="btn btn-primary full-button" type="submit">Register</button><p class="center">Already registered? <a href="{{ url_for('login') }}">Log in</a></p></form></div>
+{% endblock %}

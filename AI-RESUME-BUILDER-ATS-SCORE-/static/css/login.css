@@ -1,0 +1,27 @@
+.auth-wrap {
+    max-width: 480px;
+    margin: 70px auto;
+    padding-bottom: 70px;
+}
+
+.auth-card {
+    text-align: center;
+}
+
+.auth-card form {
+    text-align: left;
+}
+
+.auth-card h1 {
+    font-size: 36px;
+}
+
+.auth-card .small {
+    color: #96a5ba;
+    font-size: 13px;
+}
+
+.auth-card a {
+    color: #8ab9ff;
+    text-decoration: none;
+}

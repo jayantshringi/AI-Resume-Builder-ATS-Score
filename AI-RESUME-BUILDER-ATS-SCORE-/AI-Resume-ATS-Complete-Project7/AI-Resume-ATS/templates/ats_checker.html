@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}ATS Score Checker{% endblock %}
+{% block content %}
+<section class="page-intro"><p class="eyebrow">RESUME ANALYSIS</p><h1>ATS score checker</h1><p>Upload your resume and paste the target job description. Every analysis is calculated from your actual text.</p></section>
+<form class="form-panel" method="post" enctype="multipart/form-data">
+  <div class="form-grid">
+    <label>Target job title <span class="muted">(optional)</span><input name="job_title" placeholder="e.g. Frontend Developer"></label>
+    <label>Resume file *<input type="file" name="resume" accept=".pdf,.docx,.txt" required><small>PDF, DOCX or TXT • maximum 8 MB • scanned PDFs need OCR before text can be analyzed</small></label>
+    <label class="full-width">Job description *<textarea name="job_description" rows="9" required placeholder="Paste the complete job description, including skills and requirements..."></textarea></label>
+  </div>
+  <div class="notice"><strong>Privacy:</strong> uploaded resume files are removed after this request. The app stores only the analysis score and job title in history, not the extracted resume text.</div>
+  <button class="btn btn-primary" type="submit">Analyze resume →</button>
+</form>
+{% endblock %}

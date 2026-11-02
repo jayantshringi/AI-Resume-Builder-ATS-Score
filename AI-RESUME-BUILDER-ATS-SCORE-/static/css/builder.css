@@ -1,0 +1,77 @@
+.builder-grid {
+    display: grid;
+    grid-template-columns: 1.08fr .92fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.form-card {
+    padding: 28px;
+}
+
+.section-block {
+    padding: 20px 0;
+    border-top: 1px solid var(--line);
+}
+
+.section-block:first-child {
+    border-top: 0;
+}
+
+.builder-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.color-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.color-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, .4);
+    cursor: pointer;
+}
+
+.preview-mini {
+    background: #fff;
+    color: #1e293b;
+    border-radius: 8px;
+    min-height: 600px;
+    padding: 28px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .35);
+}
+
+.template-select {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.template-option {
+    border: 1px solid #dbe3ef;
+    border-radius: 8px;
+    padding: 8px;
+    color: #334155;
+    background: #fff;
+    cursor: pointer;
+}
+
+.template-option.selected {
+    outline: 3px solid #82b5ff;
+}
+
+@media (max-width: 850px) {
+    .builder-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .template-select {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

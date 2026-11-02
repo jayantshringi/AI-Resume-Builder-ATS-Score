@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <title>ATS Result</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/main.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/ats-result.css') }}"
+    >
+</head>
+
+<body class="site-bg">
+
+    <!-- Navigation -->
+    <header class="nav">
+
+        <a
+            class="logo"
+            href="{{ url_for('home') }}"
+        >
+            AI Resume Builder
+        </a>
+
+        <nav class="nav-links">
+
+            <a href="{{ url_for('home') }}">
+                Home
+            </a>
+
+            <a href="{{ url_for('builder') }}">
+                Build Resume
+            </a>
+
+            <a
+                class="active"
+                href="{{ url_for('ats') }}"
+            >
+                ATS Score
+            </a>
+
+            <a href="{{ url_for('templates') }}">
+                Templates
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <!-- Hero Section -->
+        <section class="hero compact">
+
+            <div class="eyebrow">
+                ATS ANALYSIS COMPLETE
+            </div>
+
+            <h1>
+                Your Resume <span>ATS Score</span>
+            </h1>
+
+            <p>
+                {{ filename }}
+            </p>
+
+        </section>
+
+
+        <!-- Score and Metrics -->
+        <section class="result-grid">
+
+            <!-- Score Card -->
+            <div class="glass card score">
+
+                <div
+                    class="score-ring"
+                    style="--score: {{ result.score }}"
+                >
+
+                    <strong>
+                        {{ result.score }}
+                    </strong>
+
+                    <small>
+                        /100
+                    </small>
+
+                </div>
+
+
+                {% if result.score >= 80 %}
+
+                    <h2>
+                        Excellent ATS Readiness
+                    </h2>
+
+                {% elif result.score >= 65 %}
+
+                    <h2>
+                        Good ATS Readiness
+                    </h2>
+
+                {% elif result.score >= 45 %}
+
+                    <h2>
+                        Needs Improvement
+                    </h2>
+
+                {% else %}
+
+                    <h2>
+                        Low ATS Readiness
+                    </h2>
+
+                {% endif %}
+
+
+                <p class="muted">
+                    This score was calculated from the uploaded resume.
+                    Uploading a different resume can produce a different score.
+                </p>
+
+
+                <a
+                    class="btn inline"
+                    href="{{ url_for('ats') }}"
+                >
+                    Analyze Another Resume
+                </a>
+
+            </div>
+
+
+            <!-- Metrics Card -->
+            <div class="glass card metrics">
+
+                {% for label, value in [
+                    ('Keywords', result.keywords),
+                    ('Skills', result.skills),
+                    ('Structure', result.structure),
+                    ('Experience', result.experience),
+                    ('Education', result.education),
+                    ('Contact', result.contact),
+                    ('Achievements', result.achievements),
+                    ('ATS Readability', result.formatting),
+                    ('Resume Length', result.length),
+                    ('Consistency', result.consistency)
+                ] %}
+
+                    <div class="metric">
+
+                        <div>
+                            <span>
+                                {{ label }}
+                            </span>
+
+                            <b>
+                                {{ value }}%
+                            </b>
+                        </div>
+
+
+                        <!-- Progress Bar -->
+                        <div
+                            class="bar"
+                            data-width="{{ value }}"
+                        >
+                            <i class="bar-fill"></i>
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+
+        <!-- Improvement Tips -->
+        <section class="glass card details">
+
+            <div class="target">
+
+                <h2>
+                    How to Reach 80+
+                </h2>
+
+                <p>
+                    Current score:
+                    <strong>{{ result.score }}/100</strong>.
+
+                    The tips below are prioritized by your weakest areas.
+                    They are improvement targets, not a guarantee of a particular score.
+                </p>
+
+            </div>
+
+
+            <div
+                class="tips-grid"
+                style="margin-top: 18px"
+            >
+
+                {% for tip in result.tips %}
+
+                    <article class="tip">
+
+                        <strong>
+                            {{ tip.title }} · {{ tip.score }}%
+                        </strong>
+
+                        <p>
+                            {{ tip.detail }}
+                        </p>
+
+                    </article>
+
+                {% else %}
+
+                    <article class="tip">
+
+                        <strong>
+                            ✓ Strong foundation
+                        </strong>
+
+                        <p>
+                            Your measured areas are already relatively strong.
+                            Keep the resume concise and accurate.
+                        </p>
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+
+        <!-- Skills and Keywords -->
+        <section class="glass card details">
+
+            <h2>
+                Skills & Keywords Found
+            </h2>
+
+            <p>
+                {{
+                    result.skills_found|join(', ')
+                    if result.skills_found
+                    else 'No common skills detected.'
+                }}
+            </p>
+
+        </section>
+
+
+        <!-- Resume Structure -->
+        <section class="glass card details">
+
+            <h2>
+                Resume Structure
+            </h2>
+
+            <p>
+
+                <strong>
+                    Sections:
+                </strong>
+
+                {{
+                    result.sections|join(', ')
+                    if result.sections
+                    else 'None detected'
+                }}
+
+            </p>
+
+
+            <p>
+
+                <strong>
+                    Word count:
+                </strong>
+
+                {{ result.word_count }}
+
+                ·
+
+                <strong>
+                    Action words:
+                </strong>
+
+                {{
+                    result.actions|join(', ')
+                    if result.actions
+                    else 'None detected'
+                }}
+
+            </p>
+
+        </section>
+
+
+        <!-- Contact Check -->
+        <section class="glass card details">
+
+            <h2>
+                Contact Check
+            </h2>
+
+            <p>
+
+                Email:
+
+                <strong>
+                    {{ 'Found' if result.email else 'Missing' }}
+                </strong>
+
+                ·
+
+                Phone:
+
+                <strong>
+                    {{ 'Found' if result.phone else 'Missing' }}
+                </strong>
+
+                ·
+
+                LinkedIn:
+
+                <strong>
+                    {{ 'Found' if result.linkedin else 'Not found' }}
+                </strong>
+
+                ·
+
+                GitHub:
+
+                <strong>
+                    {{ 'Found' if result.github else 'Not found' }}
+                </strong>
+
+            </p>
+
+        </section>
+
+
+        <!-- Improve Resume -->
+        <section class="glass card details">
+
+            <a
+                class="btn"
+                href="{{ url_for('builder') }}"
+            >
+                Improve My Resume
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- Progress Bar Script -->
+    <script>
+        document.querySelectorAll(".bar").forEach(function (bar) {
+
+            const value = bar.getAttribute("data-width");
+            const fill = bar.querySelector(".bar-fill");
+
+            if (fill && value !== null) {
+                fill.style.width = value + "%";
+            }
+
+        });
+    </script>
+
+</body>
+</html>

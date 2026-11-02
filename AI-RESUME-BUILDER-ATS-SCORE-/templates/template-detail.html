@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>{{ template.name }}</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/main.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/template-detail.css') }}"
+    >
+</head>
+
+<body class="site-bg">
+
+    <!-- Navigation -->
+    <header class="nav">
+
+        <a
+            class="logo"
+            href="{{ url_for('home') }}"
+        >
+            AI Resume Builder
+        </a>
+
+        <nav class="nav-links">
+
+            <a href="{{ url_for('templates') }}">
+                All Templates
+            </a>
+
+            <a href="{{ url_for('builder') }}">
+                Build Resume
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <!-- Hero Section -->
+        <section class="hero compact">
+
+            <div class="eyebrow">
+                TEMPLATE {{ template.id }}
+            </div>
+
+            <h1>
+                {{ template.name }}
+            </h1>
+
+            <p>
+                Professional {{ template.style }} design
+                with {{ template.color }} accent.
+            </p>
+
+        </section>
+
+
+        <!-- Template Details -->
+        <section class="detail-layout">
+
+            <!-- Preview Card -->
+            <div class="glass card">
+
+                <h2>
+                    Template Preview
+                </h2>
+
+                <div
+                    class="detail-preview"
+                    data-template-color="{{ template.color }}"
+                >
+
+                    <h1 class="template-name">
+                        Your Name
+                    </h1>
+
+                    <h2 class="template-title">
+                        Professional Title
+                    </h2>
+
+                    <hr>
+
+                    <h3>
+                        SUMMARY
+                    </h3>
+
+                    <p>
+                        Your professional summary appears here.
+                    </p>
+
+                    <h3>
+                        EXPERIENCE
+                    </h3>
+
+                    <p>
+                        Experience and achievements appear here.
+                    </p>
+
+                    <h3>
+                        SKILLS
+                    </h3>
+
+                    <p>
+                        Python · SQL · Communication · Project Management
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Template Information -->
+            <div class="glass card">
+
+                <h2>
+                    {{ template.name }}
+                </h2>
+
+                <p class="muted">
+                    This is one of 24 available designs.
+                    You can change the accent color in the builder.
+                </p>
+
+                <p>
+                    <strong>Style:</strong>
+                    {{ template.style }}
+                </p>
+
+                <p>
+                    <strong>Accent:</strong>
+                    {{ template.color }}
+                </p>
+
+
+                <!-- Select Template -->
+                <form
+                    method="POST"
+                    action="{{ url_for('select_template', template_id=template.id) }}"
+                >
+
+                    <button
+                        class="btn full"
+                        type="submit"
+                    >
+                        Use This Template
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Dynamic Template Color -->
+    <script>
+        const preview = document.querySelector(".detail-preview");
+
+        if (preview) {
+            const color = preview.dataset.templateColor;
+
+            if (color) {
+                preview.style.setProperty("--template-color", color);
+            }
+        }
+    </script>
+
+</body>
+</html>

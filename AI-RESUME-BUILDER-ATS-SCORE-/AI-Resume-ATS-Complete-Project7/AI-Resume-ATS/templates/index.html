@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div class="eyebrow">AI RESUME BUILDER • ATS CHECKER</div>
+  <h1>Build a resume that<br><span>gets you noticed.</span></h1>
+  <p class="hero-copy">Create a professional resume from scratch, or upload your existing resume and compare it with a job description.</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="{{ url_for('builder') }}">✦ Create my resume</a>
+    <a class="btn btn-outline" href="{{ url_for('ats_checker') }}">⌕ Analyze my resume</a>
+  </div>
+  <div class="hero-proof"><span>✓ Rule-based scoring</span><span>✓ PDF & DOCX support</span><span>✓ Actionable suggestions</span></div>
+</section>
+<section class="feature-grid">
+  <a class="feature-card" href="{{ url_for('builder') }}"><span class="feature-icon">✦</span><p class="eyebrow">START FROM SCRATCH</p><h2>Create my resume</h2><p>Build a clean resume step by step and preview it before printing.</p><span class="text-link">Start building →</span></a>
+  <a class="feature-card feature-accent" href="{{ url_for('ats_checker') }}"><span class="feature-icon">◈</span><p class="eyebrow">ALREADY HAVE A RESUME?</p><h2>Improve my resume</h2><p>Upload a PDF, DOCX or TXT file and see a content-based ATS estimate.</p><span class="text-link">Analyze resume →</span></a>
+</section>
+<section class="section-block">
+  <div class="section-heading"><p class="eyebrow">HOW IT WORKS</p><h2>Useful tools, without requiring a paid AI API</h2></div>
+  <div class="three-grid">
+    <article class="mini-card"><span>01</span><h3>Build or upload</h3><p>Enter your details or provide a supported resume file.</p></article>
+    <article class="mini-card"><span>02</span><h3>Compare to a job</h3><p>Our rules check keywords, skills, structure and contact details.</p></article>
+    <article class="mini-card"><span>03</span><h3>Improve confidently</h3><p>See the reasons behind your score and review suggestions.</p></article>
+  </div>
+</section>
+{% endblock %}

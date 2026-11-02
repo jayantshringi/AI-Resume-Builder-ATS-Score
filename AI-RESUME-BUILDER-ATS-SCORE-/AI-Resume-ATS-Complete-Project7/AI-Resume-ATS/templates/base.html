@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}AI Resume Builder & ATS Score{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script defer src="{{ url_for('static', filename='js/main.js') }}"></script>
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="{{ url_for('index') }}"><span class="brand-mark">✦</span> AI Resume Builder</a>
+  <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+  <nav class="nav-links">
+    <a href="{{ url_for('index') }}">Home</a>
+    <a href="{{ url_for('builder') }}">Build Resume</a>
+    <a href="{{ url_for('ats_checker') }}">ATS Score</a>
+    <a href="{{ url_for('resume_templates') }}">Templates</a>
+    <a href="{{ url_for('contact') }}">Contact</a>
+    {% if current_user %}
+      <a href="{{ url_for('history') }}">History</a>
+      <a href="{{ url_for('logout') }}">Logout ({{ current_user }})</a>
+    {% else %}
+      <a href="{{ url_for('login') }}">Login</a>
+      <a class="nav-cta" href="{{ url_for('register') }}">Register</a>
+    {% endif %}
+  </nav>
+</header>
+<main class="page-shell">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-stack">
+      {% for category, message in messages %}
+        <div class="flash flash-{{ category }}">{{ message }}</div>
+      {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</main>
+<footer class="site-footer">
+  <div><a class="brand footer-brand" href="{{ url_for('index') }}">✦ AI Resume Builder & ATS</a><p>Practical resume tools. Transparent, rule-based analysis.</p></div>
+  <div><strong>Contact</strong><a href="mailto:{{ general_email }}">Mohit Kumar</a><a href="mailto:{{ support_email }}">Aditya Singh</a></div>
+  <div class="footer-note">ATS score is an estimate, not an employment guarantee.</div>
+</footer>
+</body>
+</html>

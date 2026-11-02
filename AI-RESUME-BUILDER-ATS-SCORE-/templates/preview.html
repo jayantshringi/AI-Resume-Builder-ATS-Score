@@ -1,0 +1,158 @@
+```html
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Resume Preview</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/main.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/preview.css') }}"
+    >
+</head>
+
+<body class="site-bg">
+
+    <!-- Navigation -->
+    <header class="nav">
+
+        <a
+            class="logo"
+            href="{{ url_for('home') }}"
+        >
+            AI Resume Builder
+        </a>
+
+        <nav class="nav-links">
+
+            <a href="{{ url_for('builder') }}">
+                Edit
+            </a>
+
+            <a href="{{ url_for('templates') }}">
+                Templates
+            </a>
+
+            <a href="{{ url_for('ats') }}">
+                ATS Score
+            </a>
+
+        </nav>
+
+    </header>
+
+    <!-- Main Content -->
+    <main class="container preview-wrap">
+
+        <!-- Preview Actions -->
+        <div class="preview-actions">
+
+            <a
+                class="btn"
+                href="{{ url_for('builder') }}"
+            >
+                Edit Resume
+            </a>
+
+            <button
+                class="btn secondary"
+                type="button"
+                onclick="window.print()"
+            >
+                Print / Save PDF
+            </button>
+
+            <a
+                class="btn secondary"
+                href="{{ url_for('ats') }}"
+            >
+                Check ATS
+            </a>
+
+        </div>
+
+        <!-- Resume -->
+        <article
+            class="resume-paper"
+            style="--resume-color: {{ resume.color }}"
+        >
+
+            <!-- Resume Header -->
+            <header class="resume-header">
+
+                <h1>
+                    {{ resume.name or 'Your Name' }}
+                </h1>
+
+                <h2>
+                    {{ resume.role or 'Professional Title' }}
+                </h2>
+
+                <div class="resume-contact">
+
+                    {{ resume.email }}
+
+                    {% if resume.phone %}
+                        · {{ resume.phone }}
+                    {% endif %}
+
+                    {% if resume.location %}
+                        · {{ resume.location }}
+                    {% endif %}
+
+                    {% if resume.linkedin %}
+                        · {{ resume.linkedin }}
+                    {% endif %}
+
+                </div>
+
+            </header>
+
+            <!-- Resume Sections -->
+            {% for title, key in [
+                ('SUMMARY', 'summary'),
+                ('SKILLS', 'skills'),
+                ('EXPERIENCE', 'experience'),
+                ('EDUCATION', 'education'),
+                ('PROJECTS', 'projects'),
+                ('CERTIFICATIONS', 'certifications'),
+                ('ACHIEVEMENTS', 'achievements')
+            ] %}
+
+                {% if resume[key] %}
+
+                    <section class="resume-section">
+
+                        <h3>
+                            {{ title }}
+                        </h3>
+
+                        <p>
+                            {{ resume[key] }}
+                        </p>
+
+                    </section>
+
+                {% endif %}
+
+            {% endfor %}
+
+        </article>
+
+    </main>
+
+</body>
+</html>
+```

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Resume Templates{% endblock %}
+{% block content %}
+<section class="page-intro"><p class="eyebrow">DESIGN LIBRARY</p><h1>Simple, ATS-friendly templates</h1><p>Start with a clean layout. The builder preview uses a single-column structure that is easier for many parsers to read.</p></section>
+<div class="template-grid">
+  <article class="template-card"><div class="template-preview template-blue"><b>ALEX MORGAN</b><hr><strong>SUMMARY</strong><p>Professional summary...</p><strong>EDUCATION</strong><p>Degree and institution</p><strong>SKILLS</strong><p>Python · SQL · HTML</p></div><h3>Modern Blue</h3><p>Vibrant blue accent, clean sections</p><a class="text-link" href="{{ url_for('builder', template='modern-blue') }}">Use this style →</a></article>
+  <article class="template-card"><div class="template-preview template-pro"><b>ALEX MORGAN</b><hr><strong>PROFESSIONAL SUMMARY</strong><p>Concise career overview...</p><strong>EXPERIENCE</strong><p>Role and achievements</p><strong>EDUCATION</strong><p>Degree and dates</p></div><h3>Professional</h3><p>Minimal, traditional dark slate layout</p><a class="text-link" href="{{ url_for('builder', template='professional') }}">Use this style →</a></article>
+  <article class="template-card"><div class="template-preview template-green"><b>ALEX MORGAN</b><hr><strong>PROFILE</strong><p>Short introduction...</p><strong>PROJECTS</strong><p>Project and results</p><strong>SKILLS</strong><p>Relevant skills</p></div><h3>Elegant</h3><p>Refined emerald green accent</p><a class="text-link" href="{{ url_for('builder', template='elegant') }}">Use this style →</a></article>
+</div>
+{% endblock %}

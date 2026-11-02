@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Analysis History{% endblock %}
+{% block content %}
+<section class="page-intro"><p class="eyebrow">YOUR ACCOUNT</p><h1>Analysis history</h1><p>Only scores and job titles are stored, not resume text.</p></section>
+<section class="panel">
+{% if rows %}
+<div class="table-wrap"><table><thead><tr><th>Target role</th><th>Score</th><th>Date (UTC)</th></tr></thead><tbody>{% for row in rows %}<tr><td>{{ row.job_title }}</td><td><strong>{{ row.score }}%</strong></td><td>{{ row.created_at }}</td></tr>{% endfor %}</tbody></table></div>
+{% else %}<p>No analyses linked to this account yet. <a href="{{ url_for('ats_checker') }}">Analyze a resume</a>.</p>{% endif %}
+</section>
+{% endblock %}

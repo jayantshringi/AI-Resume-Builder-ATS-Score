@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Resume Preview{% endblock %}
+{% block content %}
+<div class="preview-toolbar no-print">
+  <a class="btn btn-outline" href="{{ url_for('builder', template=data.get('template', template|default('modern-blue'))) }}">← Edit details</a>
+  <button class="btn btn-primary" onclick="window.print()">Print / Save as PDF</button>
+</div>
+<article class="resume-paper resume-theme-{{ data.get('template', template|default('modern-blue')) }}">
+  <header class="resume-head">
+    <h1>{{ data.full_name }}</h1>
+    <p class="resume-title">{{ data.job_title }}</p>
+    <div class="resume-contact">{{ data.email }}{% if data.phone %} · {{ data.phone }}{% endif %}{% if data.location %} · {{ data.location }}{% endif %}</div>
+    <div class="resume-contact">{{ data.linkedin }}{% if data.github %} · {{ data.github }}{% endif %}</div>
+  </header>
+  {% for title, key in [('PROFESSIONAL SUMMARY','summary'),('EDUCATION','education'),('EXPERIENCE','experience'),('SKILLS','skills'),('PROJECTS','projects'),('CERTIFICATIONS & ACHIEVEMENTS','certifications')] %}
+    {% if data.get(key) %}
+    <section class="resume-section"><h2>{{ title }}</h2><p class="preserve-lines">{{ data.get(key) }}</p></section>
+    {% endif %}
+  {% endfor %}
+</article>
+<p class="muted center no-print">Use your browser's print dialog and select “Save as PDF” to export this preview.</p>
+{% endblock %}

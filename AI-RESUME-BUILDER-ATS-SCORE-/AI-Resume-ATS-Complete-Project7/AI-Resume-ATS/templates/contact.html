@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Contact & Complaints{% endblock %}
+{% block content %}
+<section class="page-intro"><p class="eyebrow">WE'RE HERE TO HELP</p><h1>Contact & complaints</h1><p>Send a question, suggestion, bug report or complaint. The message is saved in the website database and email notifications are attempted for both contacts.</p></section>
+<div class="two-column contact-layout">
+  <section class="panel"><h2>Contact details</h2><div class="contact-item"><span class="feature-icon">✉</span><div><strong>General contact</strong><a href="mailto:{{ general_email }}">{{ general_email }}</a></div></div><div class="contact-item"><span class="feature-icon">✉</span><div><strong>Support / complaints</strong><a href="mailto:{{ support_email }}">{{ support_email }}</a></div></div><div class="notice">Email notifications require valid SMTP settings in your local <code>.env</code> file. If SMTP is unavailable, the message is still saved in the database.</div></section>
+  <form class="form-panel" method="post">
+    <h2>Send us a message</h2>
+    <label>Your name *<input name="name" required maxlength="120" placeholder="Your name"></label>
+    <label>Your email *<input name="email" type="email" required maxlength="254" placeholder="you@example.com"></label>
+    <label>Message type *
+      <select name="category" required>
+        <option value="Suggestion">Suggestion</option>
+        <option value="Technical Issues">Technical Issues</option>
+        <option value="Complaint">Complaint</option>
+        <option value="General Query">General Query</option>
+      </select>
+    </label>
+    <label>Subject *<input name="subject" required maxlength="200" placeholder="How can we help?"></label>
+    <label>Message *<textarea name="message" rows="6" required maxlength="5000" placeholder="Describe your question or complaint..."></textarea></label>
+    <button class="btn btn-primary" type="submit">Send message →</button>
+  </form>
+</div>
+{% endblock %}

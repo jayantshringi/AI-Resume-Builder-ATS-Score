@@ -1,0 +1,167 @@
+```html id="tpl8zq"
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Resume Templates</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/main.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/templates.css') }}"
+    >
+</head>
+
+<body class="site-bg">
+
+    <!-- Navigation -->
+    <header class="nav">
+
+        <a
+            class="logo"
+            href="{{ url_for('home') }}"
+        >
+            AI Resume Builder
+        </a>
+
+        <nav class="nav-links">
+
+            <a href="{{ url_for('home') }}">
+                Home
+            </a>
+
+            <a href="{{ url_for('builder') }}">
+                Build Resume
+            </a>
+
+            <a
+                class="active"
+                href="{{ url_for('templates') }}"
+            >
+                Templates
+            </a>
+
+            <a href="{{ url_for('ats') }}">
+                ATS Score
+            </a>
+
+        </nav>
+
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <!-- Hero Section -->
+        <section class="hero compact">
+
+            <div class="eyebrow">
+                TEMPLATE GALLERY
+            </div>
+
+            <h1>
+                Choose From
+                <span>24 Resume Templates</span>
+            </h1>
+
+            <p>
+                Modern, professional, creative and minimal options
+                with different accent colors.
+            </p>
+
+        </section>
+
+        <!-- Template Gallery -->
+        <section class="template-grid">
+
+            {% for t in template_catalog %}
+
+                <article
+                    class="template-card"
+                    style="--template-color: {{ t.color }}"
+                >
+
+                    <!-- Template Thumbnail -->
+                    <div class="template-thumb">
+
+                        <div class="thumb-title">
+                            {{ t.name }}
+                        </div>
+
+                        <div
+                            class="thumb-line"
+                            style="width: 65%; margin-top: 22px"
+                        ></div>
+
+                        <div
+                            class="thumb-line"
+                            style="width: 90%"
+                        ></div>
+
+                        <div
+                            class="thumb-line"
+                            style="width: 78%"
+                        ></div>
+
+                        <div
+                            class="thumb-line"
+                            style="width: 92%; margin-top: 20px"
+                        ></div>
+
+                        <div
+                            class="thumb-line"
+                            style="width: 55%"
+                        ></div>
+
+                        <div
+                            class="thumb-line"
+                            style="width: 84%"
+                        ></div>
+
+                        <div
+                            class="thumb-line"
+                            style="width: 70%"
+                        ></div>
+
+                    </div>
+
+                    <!-- Template Information -->
+                    <div class="template-meta">
+
+                        <strong>
+                            {{ t.id }}. {{ t.name }}
+                        </strong>
+
+                        <a
+                            href="{{ url_for(
+                                'template_detail',
+                                template_id=t.id
+                            ) }}"
+                        >
+                            View
+                        </a>
+
+                    </div>
+
+                </article>
+
+            {% endfor %}
+
+        </section>
+
+    </main>
+
+</body>
+</html>
+```

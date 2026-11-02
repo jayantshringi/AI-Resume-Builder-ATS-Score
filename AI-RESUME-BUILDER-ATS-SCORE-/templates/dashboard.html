@@ -1,0 +1,190 @@
+```html
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/main.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/dashboard.css') }}"
+    >
+</head>
+
+<body class="site-bg">
+
+    <!-- Navigation -->
+    <header class="nav">
+        <a class="logo" href="{{ url_for('home') }}">
+            AI Resume Builder
+        </a>
+
+        <nav class="nav-links">
+            <a
+                class="active"
+                href="{{ url_for('dashboard') }}"
+            >
+                Dashboard
+            </a>
+
+            <a href="{{ url_for('builder') }}">
+                Build Resume
+            </a>
+
+            <a href="{{ url_for('ats') }}">
+                ATS Score
+            </a>
+
+            <a href="{{ url_for('templates') }}">
+                Templates
+            </a>
+
+            <a href="{{ url_for('logout') }}">
+                Logout
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <!-- Hero Section -->
+        <section class="hero compact">
+            <div class="eyebrow">
+                DASHBOARD
+            </div>
+
+            <h1>
+                Your Resume <span>Workspace</span>
+            </h1>
+
+            <p>
+                Create your resume, select a template and check ATS readiness.
+            </p>
+        </section>
+
+        <!-- Dashboard Grid -->
+        <section class="dash-grid">
+
+            <!-- Resume Builder Card -->
+            <div class="glass dash-card">
+
+                <h2>
+                    Resume Builder
+                </h2>
+
+                <p class="muted">
+                    Your current template: #{{ resume.template }}
+                </p>
+
+                <div class="stat">
+                    {{ "Ready" if resume.name else "Start" }}
+                </div>
+
+                <p class="muted">
+                    Personal details, skills, experience, education,
+                    projects and achievements.
+                </p>
+
+                <a
+                    class="btn"
+                    href="{{ url_for('builder') }}"
+                >
+                    Open Builder
+                </a>
+
+            </div>
+
+            <!-- Quick Actions Card -->
+            <div class="glass dash-card">
+
+                <h2>
+                    Quick Actions
+                </h2>
+
+                <div class="quick-grid">
+
+                    <!-- Templates -->
+                    <a
+                        class="quick"
+                        href="{{ url_for('templates') }}"
+                    >
+                        <strong>
+                            24 Templates
+                        </strong>
+
+                        <br>
+
+                        <span>
+                            Choose a design
+                        </span>
+                    </a>
+
+                    <!-- ATS Score -->
+                    <a
+                        class="quick"
+                        href="{{ url_for('ats') }}"
+                    >
+                        <strong>
+                            ATS Score
+                        </strong>
+
+                        <br>
+
+                        <span>
+                            Analyze a resume
+                        </span>
+                    </a>
+
+                    <!-- Preview -->
+                    <a
+                        class="quick"
+                        href="{{ url_for('preview') }}"
+                    >
+                        <strong>
+                            Preview
+                        </strong>
+
+                        <br>
+
+                        <span>
+                            View your resume
+                        </span>
+                    </a>
+
+                    <!-- Contact -->
+                    <a
+                        class="quick"
+                        href="{{ url_for('contact') }}"
+                    >
+                        <strong>
+                            Contact
+                        </strong>
+
+                        <br>
+
+                        <span>
+                            Get help
+                        </span>
+                    </a>
+
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+</body>
+</html>
+```
