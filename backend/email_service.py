@@ -2,11 +2,15 @@ import os
 import re
 import smtplib
 from email.message import EmailMessage
-from dotenv import load_dotenv
+try:
+    from dotenv import load_dotenv
+except ImportError:
+    load_dotenv = None
 
 def send_contact_notification(name, sender_email, category, subject, message,
                               general_email, support_email):
-    load_dotenv(override=True)
+    if load_dotenv:
+        load_dotenv(override=True)
     host = os.getenv("SMTP_HOST", "").strip()
     port_raw = os.getenv("SMTP_PORT", "587").strip()
     try:

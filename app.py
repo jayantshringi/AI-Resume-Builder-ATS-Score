@@ -7,14 +7,17 @@ from functools import wraps
 from flask import Flask, render_template, request, redirect, url_for, flash, session, send_file
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
-from dotenv import load_dotenv
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 
 from backend.ats_engine import analyze_resume
 from backend.resume_parser import extract_resume_text
 from backend.email_service import send_contact_notification
 from backend.ai_service import improve_bullet_points, generate_summary, get_ai_ats_feedback
 
-load_dotenv()
 
 IS_VERCEL = bool(os.getenv("VERCEL"))
 if IS_VERCEL:

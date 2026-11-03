@@ -1,10 +1,16 @@
 import os
 import json
 import logging
-import requests
-from dotenv import load_dotenv
+try:
+    import requests
+except ImportError:
+    requests = None
 
-load_dotenv()
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 
 logger = logging.getLogger(__name__)
 
@@ -12,6 +18,9 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-flash-lite-latest").strip()
 
 def _call_gemini(prompt: str, timeout: int = 15) -> tuple[bool, str]:
+    if requests is None:
+        return False, "The 'requests' package is not installed. Please run: pip install requests"
+
     api_key = os.getenv("GEMINI_API_KEY", GEMINI_API_KEY).strip()
     if not api_key:
         return False, "Gemini API key is not configured in .env."

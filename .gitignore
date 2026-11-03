@@ -1,0 +1,34 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+_env_backup
+
+# SQLite database and user uploads
+database/*.db
+_app_db_backup
+uploads/*
+!uploads/.gitkeep
+generated_resumes/*
+!generated_resumes/.gitkeep
+
+# Caches and logs
+.pytest_cache/
+*.log
+
+# Deployment & IDE artifacts
+.vercel/
+.idea/
+.vscode/
+*.swp
+

@@ -23,10 +23,9 @@ A Flask full-stack starter project with a responsive frontend, rule-based ATS es
 
 ## Setup (Windows / VS Code)
 
-1. Extract the ZIP.
-2. Open the extracted `AI-Resume-ATS` folder in VS Code.
-3. Open Terminal → New Terminal.
-4. Create a virtual environment:
+1. Open this repository folder in VS Code.
+2. Open Terminal → New Terminal.
+3. Create a virtual environment:
 
    ```powershell
    py -m venv .venv

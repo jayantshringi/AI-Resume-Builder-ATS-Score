@@ -1,5 +1,0 @@
-Flask
-pypdf
-Pillow
-pytesseract
-Werkzeug
