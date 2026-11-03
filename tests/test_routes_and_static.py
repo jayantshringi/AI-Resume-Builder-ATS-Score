@@ -46,3 +46,4 @@ def test_all_get_routes(client):
     for route in routes:
         res = client.get(route)
         assert res.status_code == 200, f"Failed for route {route}"
+
