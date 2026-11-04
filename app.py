@@ -49,8 +49,8 @@ os.makedirs(os.path.dirname(DATABASE), exist_ok=True)
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 os.makedirs(GENERATED_DIR, exist_ok=True)
 
-GENERAL_EMAIL = os.getenv("GENERAL_EMAIL", "support@example.com")
-SUPPORT_EMAIL = os.getenv("SUPPORT_EMAIL", "help@example.com")
+GENERAL_EMAIL = os.getenv("GENERAL_EMAIL", "mohitki7780264@gmail.com")
+SUPPORT_EMAIL = os.getenv("SUPPORT_EMAIL", "adityasing9508@gmail.com")
 
 
 def get_db():
@@ -267,7 +267,7 @@ def contact():
         if email_ok:
             flash("Thank you! Your message was saved and email notifications were sent.", "success")
         else:
-            flash("Your message was saved successfully, but email delivery is not configured or failed. The site owner must configure SMTP in .env.", "warning")
+            flash("Your message was saved successfully! (Note: Email notifications require SMTP environment variables on the server).", "warning")
             app.logger.warning("Contact email delivery: %s", email_detail)
         return redirect(url_for("contact"))
     return render_template("contact.html")
